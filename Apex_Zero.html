@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>APEX ZERO</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="ov">
+  <canvas id="ov-bg"></canvas>
+  <div id="ov-scanline"></div>
+  <div id="ov-enter-flash"></div>
+  <div id="ov-left">
+    <div class="ov-brand">
+      <div class="ov-eyebrow">TACTICAL COMPETITIVE FPS</div>
+      <h1 class="ov-h1">
+        <span class="part1">APEX</span>
+        <span class="part2">ZERO</span>
+      </h1>
+      <div class="ov-underline"></div>
+      <div class="ov-tagline">BUILT FOR COMBAT &nbsp;<span>·</span>&nbsp; ZERO MERCY</div>
+    </div>
+
+    <div class="ov-div"></div>
+
+    <div class="ov-cta">
+      <button class="btn-primary" id="sb2" style="animation-delay:.28s">&#9654;&nbsp;&nbsp;ENTER CRUCIBLE <span class="btn-arrow">→</span></button>
+      <button class="btn-ghost" id="open-armory-btn" onclick="openArmory()" style="--i:1">&#9875;&nbsp; ARMORY &mdash; SELECT LOADOUT</button>
+      <button class="btn-ghost" id="open-settings-menu" style="--i:2">&#9881;&nbsp; SETTINGS</button>
+    </div>
+
+    <div class="ov-keys">
+      <b>WASD</b> Move &nbsp;·&nbsp; <b>LMB</b> Fire &nbsp;·&nbsp; <b>RMB</b> ADS<br>
+      <b>R</b> Reload &nbsp;·&nbsp; <b>G</b> Grenade &nbsp;·&nbsp; <b>Q/E</b> Lean<br>
+      <b>C</b> Crouch &nbsp;·&nbsp; <b>SHIFT</b> Sprint &nbsp;·&nbsp; <b>ESC</b> Pause
+    </div>
+    <div class="ov-sys-status">
+      <span class="sys-dot"></span>ALL SYSTEMS OPERATIONAL
+    </div>
+
+    <div class="ov-status">
+      <div class="ov-stat"><div class="ov-stat-val">3</div><div class="ov-stat-lbl">MAPS</div></div>
+      <div class="ov-stat"><div class="ov-stat-val">10+</div><div class="ov-stat-lbl">WEAPONS</div></div>
+      <div class="ov-stat"><div class="ov-stat-val">∞</div><div class="ov-stat-lbl">ROUNDS</div></div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL: Map + Difficulty -->
+  <div id="ov-right">
+
+    <div class="rp-section">
+      <div class="rp-title">SELECT MAP</div>
+      <div class="map-row" id="map-grid">
+        <div class="map-card active" data-map="0" onclick="selMap(0)">
+          <div class="map-art map-art-breach"></div>
+          <div class="map-info">
+            <div class="map-badge">MAP 01</div>
+            <div class="map-name">BREACH</div>
+            <div class="map-sub">INDUSTRIAL · CQB</div>
+          </div>
+          <div class="map-active-bar"></div>
+        </div>
+        <div class="map-card" data-map="1" onclick="selMap(1)">
+          <div class="map-art map-art-outpost"></div>
+          <div class="map-info">
+            <div class="map-badge">MAP 02</div>
+            <div class="map-name">OUTPOST</div>
+            <div class="map-sub">DESERT · MID RANGE</div>
+          </div>
+          <div class="map-active-bar"></div>
+        </div>
+        <div class="map-card" data-map="2" onclick="selMap(2)">
+          <div class="map-art map-art-district"></div>
+          <div class="map-info">
+            <div class="map-badge">MAP 03</div>
+            <div class="map-name">DISTRICT</div>
+            <div class="map-sub">URBAN · LONG RANGE</div>
+          </div>
+          <div class="map-active-bar"></div>
+        </div>
+        <div class="map-card" data-map="3" onclick="selMap(3)">
+          <div class="map-art map-art-bunker"></div>
+          <div class="map-info">
+            <div class="map-badge">MAP 04</div>
+            <div class="map-name">BUNKER</div>
+            <div class="map-sub">UNDERGROUND · CQB</div>
+          </div>
+          <div class="map-active-bar"></div>
+        </div>
+        <div class="map-card" data-map="4" onclick="selMap(4)">
+          <div class="map-art map-art-glacier"></div>
+          <div class="map-info">
+            <div class="map-badge">MAP 05</div>
+            <div class="map-name">GLACIER</div>
+            <div class="map-sub">ARCTIC · LONG RANGE</div>
+          </div>
+          <div class="map-active-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rp-section">
+      <div class="rp-title">DIFFICULTY</div>
+      <div class="diff-row" id="diff-grid">
+        <div class="diff-card2 d2c-0" data-diff="0" onclick="selDiff(0)">
+          <span class="diff-icon">🎓</span>
+          <div class="diff-name">RECRUIT</div>
+          <div class="diff-sub">1 ENEMY · EASY</div>
+          <div class="diff-pips"><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span></div>
+        </div>
+        <div class="diff-card2 d2c-1 active" data-diff="1" onclick="selDiff(1)">
+          <span class="diff-icon">⚔️</span>
+          <div class="diff-name">SOLDIER</div>
+          <div class="diff-sub">3 ENEMIES · STANDARD</div>
+          <div class="diff-pips"><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span></div>
+        </div>
+        <div class="diff-card2 d2c-2" data-diff="2" onclick="selDiff(2)">
+          <span class="diff-icon">🔥</span>
+          <div class="diff-name">ELITE</div>
+          <div class="diff-sub">5 ENEMIES · VETERAN</div>
+          <div class="diff-pips"><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span></div>
+        </div>
+        <div class="diff-card2 d2c-3" data-diff="3" onclick="selDiff(3)">
+          <span class="diff-icon">💀</span>
+          <div class="diff-name">NIGHTMARE</div>
+          <div class="diff-sub">7 ENEMIES · LETHAL</div>
+          <div class="diff-pips"><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span><span class="diff-pip"></span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ HUD ══════════════════════════════════════════ -->
+<div id="hud">
+  <div id="xh"></div><div id="hm"></div><div id="fs-dot"></div>
+  <div id="lean-l"></div><div id="lean-r"></div>
+  <div id="jump-ind">AIR</div>
+  <div id="tpv-ind">3RD PERSON [V]</div>
+
+  <!-- Top bar -->
+  <div id="sb">
+    <div class="si"><div class="sil">ROUND</div><div class="siv" id="rn">1</div></div>
+    <div class="si"><div class="sil">YOU</div><div class="siv" id="ps">0</div></div>
+    <div class="si"><div class="sil">ENEMY</div><div class="siv" id="es">0</div></div>
+    <div class="si"><div class="sil">TIME</div><div class="siv" id="rt">1:15</div></div>
+  </div>
+
+  <!-- Kill counter -->
+  <div id="kw"><div id="kl">KILLS</div><div id="kn">0</div></div>
+
+  <!-- Kill feed -->
+  <div id="kf"></div>
+
+  <!-- Health / Armor / Credits -->
+  <div id="hp">
+    <div class="hud-label">HEALTH</div>
+    <div class="hud-bar-track"><div class="hud-bar-fill" id="hf" style="width:100%"></div></div>
+    <div id="hpn">100</div>
+    <div id="arm-row">
+      <div class="hud-label" style="color:#4ac8ff;margin-bottom:0;margin-right:4px">ARMOR</div>
+      <div class="bar-arm-track"><div class="hud-bar-fill" id="af" style="width:100%"></div></div>
+      <div id="armn">50</div>
+    </div>
+    <div id="money-hud">
+      <span class="credits-label">CREDITS</span>
+      <div id="money-n">$1100</div>
+    </div>
+  </div>
+
+  <!-- Weapon info -->
+  <div id="aw">
+    <div id="wn">ARC-15</div>
+    <div class="ammo-row"><div id="ac">30</div><div id="ar">/ 90</div></div>
+    <div id="rl"></div>
+    <div id="pen-ind">WALL PEN</div>
+    <div id="attach-hud"></div>
+  </div>
+
+  <!-- Shop button -->
+  <button id="shop-btn" onclick="openShop()">SHOP [B]</button>
+
+  <!-- Weapon slots -->
+  <div id="ws">
+    <div class="wss on" id="w0">1<br>PRIMARY</div>
+    <div class="wss" id="w1">2<br>PISTOL</div>
+    <div class="wss" id="w2">3<br>MELEE</div>
+    <div class="wss" id="w3">4<br>UTIL</div>
+    <div class="wss" id="w4">5<br>SNIPER</div>
+  </div>
+
+  <!-- Minimap -->
+  <div id="mm"><canvas id="mc" width="150" height="150"></canvas></div>
+
+  <!-- Quick actions -->
+  <div id="qa">
+    <div class="qa-btn" onclick="quickMelee()" title="Quick Melee [F]"><span class="qa-ico">🗡️</span><span class="qa-key">F</span></div>
+    <div class="qa-btn" onclick="quickGrenade()" title="Quick Grenade [G]"><span class="qa-ico">💥</span><span class="qa-key">G</span></div>
+    <div class="qa-btn" onclick="toggleTpv()" id="qa-tpv" title="3rd Person [V]"><span class="qa-ico">📷</span><span class="qa-key">V</span></div>
+  </div>
+</div>
+
+<div id="dmg"></div>
+<div id="blood-vig"></div>
+
+<!-- ══ ARMORY MODAL ═══════════════════════════════════ -->
+<div id="armory">
+  <div id="arm-header">
+    <div>
+      <div class="arm-title">ARMORY</div>
+      <div class="arm-subtitle">CONFIGURE YOUR LOADOUT BEFORE DEPLOYMENT</div>
+    </div>
+    <button id="arm-close" onclick="closeArmory()">&#10005; CLOSE</button>
+  </div>
+  <div id="arm-body">
+    <!-- Left: weapon list -->
+    <div id="arm-left">
+      <div class="arm-cat-lbl">PRIMARY</div>
+      <div id="arm-list-primary"></div>
+      <div class="arm-cat-lbl" style="margin-top:10px">SECONDARY</div>
+      <div id="arm-list-secondary"></div>
+    </div>
+
+    <!-- Center: 3D preview -->
+    <div id="arm-center">
+      <canvas id="arm-cvs" width="460" height="300"></canvas>
+      <div id="arm-wep-label">ARC-15</div>
+      <div id="arm-wep-type">ASSAULT RIFLE</div>
+      <div class="arm-hint">DRAG TO ROTATE · AUTO-SPINS</div>
+    </div>
+
+    <!-- Right: stats + buy -->
+    <div id="arm-right">
+      <div>
+        <div class="arm-stat-row" id="arm-stat-dmg">
+          <div class="arm-stat-lbl">DAMAGE <span id="armv-dmg">22</span></div>
+          <div class="arm-bar-t"><div class="arm-bar-f" id="armb-dmg" style="width:26%"></div></div>
+        </div>
+        <div class="arm-stat-row" id="arm-stat-rof">
+          <div class="arm-stat-lbl">FIRE RATE <span id="armv-rof">700</span></div>
+          <div class="arm-bar-t"><div class="arm-bar-f" id="armb-rof" style="width:70%"></div></div>
+        </div>
+        <div class="arm-stat-row" id="arm-stat-rng">
+          <div class="arm-stat-lbl">RANGE <span id="armv-rng">200m</span></div>
+          <div class="arm-bar-t"><div class="arm-bar-f" id="armb-rng" style="width:67%"></div></div>
+        </div>
+        <div class="arm-stat-row" id="arm-stat-mag">
+          <div class="arm-stat-lbl">MAG SIZE <span id="armv-mag">30</span></div>
+          <div class="arm-bar-t"><div class="arm-bar-f" id="armb-mag" style="width:30%"></div></div>
+        </div>
+      </div>
+
+      <div id="arm-desc-box">Versatile assault rifle. Reliable at all ranges.</div>
+
+      <div id="arm-price-display">DEFAULT</div>
+
+      <button id="arm-select-btn" onclick="armorySelect()">SELECT LOADOUT</button>
+
+      <div class="arm-loadout-bar">
+        <div class="arm-loadout-label">CURRENT LOADOUT</div>
+        <div class="arm-loadout-slot">
+          <span class="arm-slot-lbl">PRIMARY</span>
+          <span class="arm-slot-val" id="arm-lo-primary">ARC-15</span>
+        </div>
+        <div class="arm-loadout-slot">
+          <span class="arm-slot-lbl">SECONDARY</span>
+          <span class="arm-slot-val" id="arm-lo-secondary">GHOST G17</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAUSE ═════════════════════════════════════════ -->
+<div id="pu">
+  <div class="pu-box">
+    <div class="pu-title">PAUSED</div>
+    <div class="pu-subtitle">PRESS ESC TO RESUME</div>
+    <div id="pu-btns">
+      <button class="pu-btn" id="open-settings-pause">&#9881; SETTINGS</button>
+      <button class="pu-btn" onclick="openShop()">SHOP</button>
+      <button class="pu-btn" onclick="toggleTpv()" id="pu-tpv-btn">&#128247; 3RD PERSON</button>
+      <button class="pu-btn danger" onclick="goMenu()">&#8592; MENU</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DEAD ══════════════════════════════════════════ -->
+<div id="ds">
+  <h2>ELIMINATED</h2>
+  <p>RESPAWNING IN <span id="rc">3</span>s</p>
+  <div class="ds-bar"><div class="ds-bar-fill"></div></div>
+</div>
+
+<!-- ══ ROUND END ══════════════════════════════════════ -->
+<div id="re"><h2 id="reh"></h2><p id="rep"></p></div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                   BUY PHASE                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="buy" class="overlay-screen" style="display:none">
+  <div class="overlay-header">
+    <div class="overlay-title">BUY PHASE</div>
+    <div id="buy-reward" class="reward-tag">+$500 ROUND WIN</div>
+    <div class="credits-display">
+      <span>CREDITS</span><span id="buy-credits">$1100</span>
+    </div>
+    <div class="timer-bar-wrap">
+      <span style="font-size:8px;letter-spacing:3px;color:var(--dim);font-family:var(--mono)">AUTO-START</span>
+      <div class="timer-bar-track"><div class="timer-bar-fill" id="buy-timer-bar" style="width:100%"></div></div>
+      <span class="timer-text" id="buy-timer">15</span>
+    </div>
+  </div>
+
+  <div class="item-grid">
+    <div class="buy-item" id="bi-arc15" onclick="buyItem('arc15')">
+      <span class="buy-icon">⬜</span>
+      <div class="buy-name">ARC-15</div>
+      <div class="buy-desc">ASSAULT RIFLE · AUTO</div>
+      <div class="buy-price">$2700</div>
+    </div>
+    <div class="buy-item" id="bi-srx50" onclick="buyItem('srx50')">
+      <span class="buy-icon">🎯</span>
+      <div class="buy-name">SRX-50</div>
+      <div class="buy-desc">SNIPER · HIGH PEN</div>
+      <div class="buy-price">$4750</div>
+    </div>
+    <div class="buy-item" id="bi-g17" onclick="buyItem('g17')">
+      <span class="buy-icon">◽</span>
+      <div class="buy-name">GHOST G17</div>
+      <div class="buy-desc">PISTOL · SEMI-AUTO</div>
+      <div class="buy-price">$500</div>
+    </div>
+    <div class="buy-item" id="bi-armor" onclick="buyItem('armor')">
+      <span class="buy-icon">🛡</span>
+      <div class="buy-name">FULL ARMOR</div>
+      <div class="buy-desc">RESTORE ARMOR</div>
+      <div class="buy-price">$650</div>
+    </div>
+    <div class="buy-item" id="bi-ammo" onclick="buyItem('ammo')">
+      <span class="buy-icon">⬛</span>
+      <div class="buy-name">AMMO PACK</div>
+      <div class="buy-desc">ALL WEAPONS</div>
+      <div class="buy-price">$200</div>
+    </div>
+    <div class="buy-item" id="bi-frag" onclick="buyItem('frag')">
+      <span class="buy-icon">💥</span>
+      <div class="buy-name">FRAG ×2</div>
+      <div class="buy-desc">GRENADE RESTOCK</div>
+      <div class="buy-price">$300</div>
+    </div>
+    <div class="buy-item" id="bi-hp" onclick="buyItem('hp')">
+      <span class="buy-icon">♥</span>
+      <div class="buy-name">MED KIT</div>
+      <div class="buy-desc">FULL HEAL</div>
+      <div class="buy-price">$400</div>
+    </div>
+    <div class="buy-item cant" style="cursor:default">
+      <span class="buy-icon" style="font-size:11px;line-height:1.8;color:var(--dim)">🪵 WOOD<br>🧱 CONCRETE<br>🔩 METAL</span>
+      <div class="buy-name" style="color:var(--dim);font-size:8px">PEN GUIDE</div>
+      <div class="buy-desc">EASY · HARD · STOPS</div>
+    </div>
+  </div>
+
+  <!-- Attachments during buy -->
+  <div id="buy-attach">
+    <div class="att-section">
+      <div class="att-weapon-title">ARC-15 ATTACHMENTS</div>
+      <div class="att-sub">SCOPE</div><div class="att-row" id="ba-scope-0"></div>
+      <div class="att-sub">MAGAZINE</div><div class="att-row" id="ba-mag-0"></div>
+      <div class="att-sub">GRIP</div><div class="att-row" id="ba-grip-0"></div>
+    </div>
+    <div class="att-section">
+      <div class="att-weapon-title">SRX-50 ATTACHMENTS</div>
+      <div class="att-sub">SCOPE</div><div class="att-row" id="ba-scope-4"></div>
+      <div class="att-sub">MAGAZINE</div><div class="att-row" id="ba-mag-4"></div>
+      <div class="att-sub">GRIP</div><div class="att-row" id="ba-grip-4"></div>
+    </div>
+  </div>
+
+  <button class="fight-btn" onclick="closeBuyPhase()">&#9654;&nbsp;&nbsp;FIGHT</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                IN-GAME SHOP                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="shop">
+  <div id="shop-wrap">
+    <div id="shop-head">
+      <h2>ARMORY</h2>
+      <div id="shop-creds">$0</div>
+      <button id="shop-close-btn" onclick="closeShop()">&#10005; CLOSE [B]</button>
+    </div>
+    <div class="shop-tabs">
+      <button class="shop-tab active" onclick="setShopTab('items')">ITEMS</button>
+      <button class="shop-tab" onclick="setShopTab('attachments')">ATTACHMENTS</button>
+    </div>
+    <div class="shop-panel active" id="sp-items">
+      <div class="item-grid" style="max-width:640px">
+        <div class="buy-item" id="si-arc15" onclick="buyItem('arc15')">
+          <span class="buy-icon">⬜</span><div class="buy-name">ARC-15</div>
+          <div class="buy-desc">ASSAULT RIFLE</div><div class="buy-price">$2700</div>
+        </div>
+        <div class="buy-item" id="si-srx50" onclick="buyItem('srx50')">
+          <span class="buy-icon">🎯</span><div class="buy-name">SRX-50</div>
+          <div class="buy-desc">SNIPER RIFLE</div><div class="buy-price">$4750</div>
+        </div>
+        <div class="buy-item" id="si-armor" onclick="buyItem('armor')">
+          <span class="buy-icon">🛡</span><div class="buy-name">FULL ARMOR</div>
+          <div class="buy-desc">RESTORE ARMOR</div><div class="buy-price">$650</div>
+        </div>
+        <div class="buy-item" id="si-hp" onclick="buyItem('hp')">
+          <span class="buy-icon">♥</span><div class="buy-name">MED KIT</div>
+          <div class="buy-desc">FULL HEAL</div><div class="buy-price">$400</div>
+        </div>
+        <div class="buy-item" id="si-ammo" onclick="buyItem('ammo')">
+          <span class="buy-icon">⬛</span><div class="buy-name">AMMO PACK</div>
+          <div class="buy-desc">ALL WEAPONS</div><div class="buy-price">$200</div>
+        </div>
+        <div class="buy-item" id="si-frag" onclick="buyItem('frag')">
+          <span class="buy-icon">💥</span><div class="buy-name">FRAG ×2</div>
+          <div class="buy-desc">GRENADE RESTOCK</div><div class="buy-price">$300</div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-panel" id="sp-attachments">
+      <div id="shop-attach">
+        <div class="att-section">
+          <div class="att-weapon-title">ARC-15 ATTACHMENTS</div>
+          <div class="att-sub">SCOPE</div><div class="att-row" id="sa-scope-0"></div>
+          <div class="att-sub">MAGAZINE</div><div class="att-row" id="sa-mag-0"></div>
+          <div class="att-sub">GRIP</div><div class="att-row" id="sa-grip-0"></div>
+        </div>
+        <div class="att-section">
+          <div class="att-weapon-title">SRX-50 ATTACHMENTS</div>
+          <div class="att-sub">SCOPE</div><div class="att-row" id="sa-scope-4"></div>
+          <div class="att-sub">MAGAZINE</div><div class="att-row" id="sa-mag-4"></div>
+          <div class="att-sub">GRIP</div><div class="att-row" id="sa-grip-4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                   SETTINGS                        -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="st">
+  <button id="st-close">&#10005;</button>
+  <div id="st-box">
+    <div class="st-logo">SETTINGS</div>
+    <div class="st-sub">CUSTOMISE YOUR EXPERIENCE</div>
+    <div class="st-cols">
+      <div class="st-sec">
+        <div class="st-sec-title">CONTROLS</div>
+        <div class="st-row"><span class="st-label">Mouse Sensitivity</span>
+          <input type="range" id="s-sens" min="1" max="20" step="1" value="10">
+          <span class="st-val" id="sv-sens">10</span></div>
+        <div class="st-row"><span class="st-label">ADS Sensitivity</span>
+          <input type="range" id="s-adssens" min="1" max="10" step="1" value="4">
+          <span class="st-val" id="sv-adssens">0.4×</span></div>
+      </div>
+      <div class="st-sec">
+        <div class="st-sec-title">GRAPHICS</div>
+        <div class="st-row"><span class="st-label">Field of View</span>
+          <input type="range" id="s-fov" min="60" max="120" step="5" value="90">
+          <span class="st-val" id="sv-fov">90°</span></div>
+        <div class="st-row"><span class="st-label">Crosshair Color</span>
+          <input type="color" id="s-xhcol" value="#ffffff"></div>
+        <div class="st-row"><span class="st-label">Crosshair Style</span>
+          <div class="st-toggle">
+            <button id="xhs-cross" class="active" onclick="setXhStyle('cross')">CROSS</button>
+            <button id="xhs-dot" onclick="setXhStyle('dot')">DOT</button>
+            <button id="xhs-none" onclick="setXhStyle('none')">NONE</button>
+          </div></div>
+      </div>
+      <div class="st-sec">
+        <div class="st-sec-title">GUNPLAY</div>
+        <div class="st-row"><span class="st-label">Recoil Strength</span>
+          <input type="range" id="s-recoil" min="0" max="20" step="1" value="10">
+          <span class="st-val" id="sv-recoil">1.0×</span></div>
+        <div class="st-row"><span class="st-label">Recoil Recovery</span>
+          <input type="range" id="s-recov" min="1" max="15" step="1" value="5">
+          <span class="st-val" id="sv-recov">5.0</span></div>
+        <div class="st-row"><span class="st-label">Headshot Multiplier</span>
+          <input type="range" id="s-hs" min="10" max="40" step="5" value="20">
+          <span class="st-val" id="sv-hs">2.0×</span></div>
+        <div class="st-row"><span class="st-label">Camera Kickback</span>
+          <input type="range" id="s-kick" min="0" max="20" step="1" value="10">
+          <span class="st-val" id="sv-kick">1.0×</span></div>
+        <div class="st-row"><span class="st-label">Kickback Recovery</span>
+          <input type="range" id="s-kickrecov" min="4" max="40" step="2" value="18">
+          <span class="st-val" id="sv-kickrecov">18</span></div>
+        <div class="st-row"><span class="st-label">Bullet Penetration</span>
+          <div class="st-toggle">
+            <button id="pen-on" class="active" onclick="setPen(true)">ON</button>
+            <button id="pen-off" onclick="setPen(false)">OFF</button>
+          </div></div>
+      </div>
+      <div class="st-sec">
+        <div class="st-sec-title">MOVEMENT &amp; LEAN</div>
+        <div class="st-row"><span class="st-label">Lean Enabled</span>
+          <div class="st-toggle">
+            <button id="lean-on" class="active" onclick="setLean(true)">ON</button>
+            <button id="lean-off" onclick="setLean(false)">OFF</button>
+          </div></div>
+        <div class="st-row"><span class="st-label">Lean Strength</span>
+          <input type="range" id="s-leanstr" min="1" max="10" step="1" value="5">
+          <span class="st-val" id="sv-leanstr">0.30m</span></div>
+        <div class="st-row"><span class="st-label">Lean Speed</span>
+          <input type="range" id="s-leanspd" min="2" max="20" step="1" value="10">
+          <span class="st-val" id="sv-leanspd">10</span></div>
+      </div>
+      <div class="st-sec">
+        <div class="st-sec-title">GAMEPLAY</div>
+        <div class="st-row"><span class="st-label">Starting Armor</span>
+          <input type="range" id="s-armor" min="0" max="100" step="10" value="50">
+          <span class="st-val" id="sv-armor">50</span></div>
+        <div class="st-row"><span class="st-label">Armor Absorption</span>
+          <input type="range" id="s-armorabsorb" min="10" max="80" step="5" value="60">
+          <span class="st-val" id="sv-armorabsorb">60%</span></div>
+        <div class="st-row"><span class="st-label">Grenade Radius</span>
+          <input type="range" id="s-gren" min="20" max="100" step="5" value="55">
+          <span class="st-val" id="sv-gren">5.5m</span></div>
+      </div>
+      <div class="st-sec">
+        <div class="st-sec-title">ECONOMY</div>
+        <div class="st-row"><span class="st-label">Starting Credits</span>
+          <input type="range" id="s-money" min="200" max="4000" step="100" value="1100">
+          <span class="st-val" id="sv-money">$1100</span></div>
+        <div class="st-row"><span class="st-label">Kill Reward</span>
+          <input type="range" id="s-kreward" min="50" max="800" step="50" value="300">
+          <span class="st-val" id="sv-kreward">$300</span></div>
+        <div class="st-row"><span class="st-label">Win Bonus</span>
+          <input type="range" id="s-wreward" min="100" max="1500" step="100" value="500">
+          <span class="st-val" id="sv-wreward">$500</span></div>
+      </div>
+      <div class="st-sec">
+        <div class="st-sec-title">ENEMY AI</div>
+        <div class="st-row"><span class="st-label">Accuracy Dropoff</span>
+          <input type="range" id="s-ai" min="1" max="20" step="1" value="8">
+          <span class="st-val" id="sv-ai">0.08</span></div>
+      </div>
+    </div>
+    <button id="st-save">SAVE &amp; CLOSE</button>
+  </div>
+</div>
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<div id="scope-overlay">
+  <canvas id="scope-canvas"></canvas>
+</div>
+<div id="reddot-overlay">
+  <canvas id="reddot-canvas" width="120" height="120"></canvas>
+</div>
+<footer>Made with ❤️ by <span>Anirudh Melkaveri</span> &copy; 2026</footer>
+</body>
+</html>
+
